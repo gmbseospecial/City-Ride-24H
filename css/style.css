@@ -1,0 +1,400 @@
+/*
+Theme Name: WVC Theme
+Description: A modern, responsive WordPress vibecoding theme built with React components, Radix UI primitives, and CSS custom properties. Features a comprehensive design system with CSS custom properties, dark mode support, accessibility compliance, and SEO optimization.
+Version: 1.13.50
+Author: VibeCoding
+Author URI: https://vibecoding.com
+Theme URI: https://vibecoding.com
+License: GPL v2 or later
+License URI: https://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: wvc-theme
+Domain Path: /languages
+Requires at least: 6.4
+Tested up to: 6.4
+Requires PHP: 7.4
+Tags:
+*/
+/* =========================
+   WooCommerce color overrides
+   (colors only, with !important)
+   ========================= */
+/* 1) Override WooCommerce CSS variables (global) */
+:root {
+  --woocommerce: var(--color-primary) !important;
+
+  --wc-primary: var(--color-primary) !important;
+  --wc-primary-text: var(--color-primary-foreground) !important;
+
+  --wc-secondary: var(--color-secondary) !important;
+  --wc-secondary-text: var(--color-secondary-foreground) !important;
+
+  --wc-highlight: var(--color-accent) !important;
+  --wc-highlight-text: var(--color-accent-foreground) !important;
+
+  --wc-content-bg: var(--color-surface) !important;
+  --wc-subtext: var(--color-muted-foreground) !important;
+
+  --wc-form-border-color: var(--color-border) !important;
+  --wc-form-color-background: var(--color-surface) !important;
+  --wc-form-color-text: var(--color-foreground) !important;
+}
+
+/* 2) Buttons */
+.wvc-woocommerce a.button,
+.wvc-woocommerce button.button,
+.wvc-woocommerce input.button,
+.wvc-woocommerce #respond input#submit {
+  background-color: var(--color-secondary) !important;
+  color: var(--color-secondary-foreground) !important;
+}
+
+.wvc-woocommerce a.button:hover,
+.wvc-woocommerce button.button:hover,
+.wvc-woocommerce input.button:hover,
+.wvc-woocommerce #respond input#submit:hover {
+  background-color: var(--color-secondary-hover, var(--color-secondary)) !important;
+  color: var(--color-secondary-foreground) !important;
+}
+
+/* Primary buttons */
+.wvc-woocommerce a.button.alt,
+.wvc-woocommerce button.button.alt,
+.wvc-woocommerce input.button.alt,
+.wvc-woocommerce #respond input#submit.alt,
+.wvc-woocommerce #add_payment_method .wc-proceed-to-checkout a.checkout-button,
+.wvc-woocommerce-cart .wc-proceed-to-checkout a.checkout-button,
+.wvc-woocommerce-checkout .wc-proceed-to-checkout a.checkout-button {
+  background-color: var(--color-primary) !important;
+  color: var(--color-primary-foreground) !important;
+}
+
+.wvc-woocommerce a.button.alt:hover,
+.wvc-woocommerce button.button.alt:hover,
+.wvc-woocommerce input.button.alt:hover,
+.wvc-woocommerce #respond input#submit.alt:hover,
+.wvc-woocommerce #add_payment_method .wc-proceed-to-checkout a.checkout-button:hover,
+.wvc-woocommerce-cart .wc-proceed-to-checkout a.checkout-button:hover,
+.wvc-woocommerce-checkout .wc-proceed-to-checkout a.checkout-button:hover {
+  background-color: var(--color-primary-hover, var(--color-primary)) !important;
+  color: var(--color-primary-foreground) !important;
+}
+
+/* Disabled buttons */
+.wvc-woocommerce a.button:disabled,
+.wvc-woocommerce button.button:disabled,
+.wvc-woocommerce input.button:disabled,
+.wvc-woocommerce #respond input#submit:disabled,
+.wvc-woocommerce a.button.disabled,
+.wvc-woocommerce button.button.disabled,
+.wvc-woocommerce input.button.disabled {
+  background-color: var(--color-secondary) !important;
+  color: var(--color-secondary-foreground) !important;
+}
+
+/* 3) Notices */
+.wvc-woocommerce-message,
+.wvc-woocommerce-info,
+.wvc-woocommerce-error {
+  background-color: var(--color-surface) !important;
+  color: var(--color-foreground) !important;
+}
+
+.wvc-woocommerce-message { border-top-color: var(--wc-green, var(--color-success, var(--color-primary))) !important; }
+.wvc-woocommerce-info    { border-top-color: var(--wc-blue,  var(--color-info,    var(--color-primary))) !important; }
+.wvc-woocommerce-error   { border-top-color: var(--wc-red,   var(--color-danger,  var(--color-primary))) !important; }
+
+.wvc-woocommerce-message::before { color: var(--wc-green, var(--color-success, var(--color-primary))) !important; }
+.wvc-woocommerce-info::before    { color: var(--wc-blue,  var(--color-info,    var(--color-primary))) !important; }
+.wvc-woocommerce-error::before   { color: var(--wc-red,   var(--color-danger,  var(--color-primary))) !important; }
+
+/* 4) Sale badge */
+.wvc-woocommerce span.onsale {
+  background-color: var(--wc-highlight, var(--color-accent)) !important;
+  color: var(--wc-highlight-text, var(--color-accent-foreground)) !important;
+}
+
+/* 5) Remove link */
+.wvc-woocommerce a.remove {
+  color: var(--wc-red, var(--color-danger, #a00)) !important;
+}
+.wvc-woocommerce a.remove:hover {
+  background-color: var(--wc-red, var(--color-danger, #a00)) !important;
+  color: var(--color-surface, #fff) !important;
+}
+
+/* 6) Product price */
+.wvc-woocommerce div.product p.price,
+.wvc-woocommerce div.product span.price,
+.wvc-woocommerce ul.products li.product .price {
+  color: var(--wc-highlight, var(--color-accent)) !important;
+}
+
+/* 7) Store notice */
+.wvc-woocommerce-store-notice,
+.wvc-woocommerce p.demo_store {
+  background-color: var(--wc-primary, var(--color-primary)) !important;
+  color: var(--wc-primary-text, var(--color-primary-foreground)) !important;
+}
+.wvc-woocommerce-store-notice a,
+.wvc-woocommerce p.demo_store a {
+  color: var(--wc-primary-text, var(--color-primary-foreground)) !important;
+}
+
+/* 8) Checkout payment box */
+.wvc-woocommerce-checkout #payment div.payment_box,
+.wvc-woocommerce #add_payment_method #payment div.payment_box {
+  background-color: var(--color-surface) !important;
+  color: var(--color-foreground) !important;
+}
+.wvc-woocommerce-checkout #payment div.payment_box::before,
+.wvc-woocommerce #add_payment_method #payment div.payment_box::before {
+  border-bottom-color: var(--color-surface) !important;
+}
+
+
+/* =========================
+   1. HEADINGS (h1-h6)
+   ========================= */
+
+/* h1 */
+.prose h1,
+.prose.prose-slate h1,
+.card-content .prose h1,
+.card-content h1 {
+  font-weight: 700; /* font-bold in Tailwind */
+  font-size: 2rem; /* 32px - between text-3xl (1.875rem) and text-4xl (2.25rem) */
+  line-height: 2.25rem; /* leading-tight (1.25 * 2rem = 2.5rem, using 2.25rem) */
+  margin-top: 0;
+  margin-bottom: 1rem; /* mb-4 in Tailwind */
+  display: block;
+}
+
+/* h2 */
+.prose h2,
+.prose.prose-slate h2,
+.card-content .prose h2,
+.card-content h2 {
+  font-weight: 600; /* font-semibold in Tailwind */
+  font-size: 1.25rem; /* text-xl in Tailwind (20px) */
+  line-height: 1.75rem; /* text-xl default line-height in Tailwind (28px) */
+  margin-top: 1.5rem; /* mt-6 in Tailwind */
+  margin-bottom: 0.75rem; /* mb-3 in Tailwind */
+  display: block;
+}
+
+.prose h2:first-child,
+.prose.prose-slate h2:first-child,
+.card-content .prose h2:first-child,
+.card-content h2:first-child,
+h2:first-child {
+  margin-top: 0;
+}
+
+/* h3 */
+.prose h3,
+.prose.prose-slate h3,
+.card-content .prose h3,
+.card-content h3 {
+  font-weight: 600; /* font-semibold in Tailwind */
+  font-size: 1.25rem; /* text-xl in Tailwind (20px) */
+  line-height: 1.75rem; /* text-xl default line-height in Tailwind (28px) */
+  margin-top: 1.5rem; /* mt-6 in Tailwind */
+  margin-bottom: 0.5rem; /* mb-2 in Tailwind */
+  display: block;
+}
+
+/* h4 */
+.prose h4,
+.prose.prose-slate h4,
+.card-content .prose h4,
+.card-content h4 {
+  font-weight: 600; /* font-semibold in Tailwind */
+  font-size: 1.125rem; /* text-lg in Tailwind (18px) */
+  line-height: 1.75rem; /* text-lg default line-height in Tailwind (28px) */
+  margin-top: 1rem; /* mt-4 in Tailwind */
+  margin-bottom: 0.5rem; /* mb-2 in Tailwind */
+  display: block;
+}
+
+/* h5 */
+.prose h5,
+.prose.prose-slate h5,
+.card-content .prose h5,
+.card-content h5 {
+  font-weight: 600; /* font-semibold in Tailwind */
+  font-size: 1rem; /* text-base in Tailwind (16px) */
+  line-height: 1.5rem; /* text-base default line-height in Tailwind (24px) */
+  margin-top: 0.75rem; /* mt-3 in Tailwind */
+  margin-bottom: 0.5rem; /* mb-2 in Tailwind */
+  display: block;
+}
+
+/* h6 */
+.prose h6,
+.prose.prose-slate h6,
+.card-content .prose h6,
+.card-content h6 {
+  font-weight: 600; /* font-semibold in Tailwind */
+  font-size: 0.875rem; /* text-sm in Tailwind (14px) */
+  line-height: 1.25rem; /* text-sm default line-height in Tailwind (20px) */
+  margin-top: 0.75rem; /* mt-3 in Tailwind */
+  margin-bottom: 0.5rem; /* mb-2 in Tailwind */
+  display: block;
+}
+
+/* =========================
+   2. PARAGRAPHS
+   ========================= */
+.prose p,
+.prose.prose-slate p,
+.card-content .prose p,
+.card-content p {
+  margin-top: 0.75rem; /* mt-3 in Tailwind */
+  margin-bottom: 0.75rem; /* mb-3 in Tailwind */
+  line-height: 1.625; /* leading-relaxed in Tailwind */
+}
+
+/* =========================
+   3. LISTS
+   ========================= */
+
+/* Unordered Lists (ul) - Only in prose/card-content contexts */
+.prose ul,
+.prose.prose-slate ul,
+.card-content .prose ul,
+.card-content ul {
+  list-style: disc;
+  list-style-type: disc;
+  list-style-image: none;
+  padding-left: 1.5rem; /* pl-6 in Tailwind */
+  margin-top: 0.75rem; /* mt-3 in Tailwind */
+  margin-bottom: 1rem; /* mb-4 in Tailwind */
+}
+
+.prose ul li,
+.prose.prose-slate ul li,
+.card-content .prose ul li,
+.card-content ul li {
+  display: list-item;
+  list-style: disc;
+  list-style-type: disc;
+  list-style-position: outside;
+  margin-top: 0.375rem; /* mt-1.5 in Tailwind (0.375rem = 6px) */
+  margin-bottom: 0.375rem; /* mb-1.5 in Tailwind */
+  padding-left: 0.25rem; /* pl-1 in Tailwind */
+}
+
+.prose ul li::marker,
+.prose.prose-slate ul li::marker,
+.card-content .prose ul li::marker,
+.card-content ul li::marker {
+  color: inherit;
+  font-size: 1em;
+}
+
+/* Ordered Lists (ol) - Only in prose/card-content contexts */
+.prose ol,
+.prose.prose-slate ol,
+.card-content .prose ol,
+.card-content ol {
+  list-style-type: decimal;
+  list-style-position: outside;
+  padding-left: 1.5rem; /* pl-6 in Tailwind */
+  margin-top: 0.75rem; /* mt-3 in Tailwind */
+  margin-bottom: 1rem; /* mb-4 in Tailwind */
+}
+
+.prose ol li,
+.prose.prose-slate ol li,
+.card-content .prose ol li,
+.card-content ol li {
+  display: list-item;
+  list-style-type: decimal;
+  list-style-position: outside;
+  margin-top: 0.375rem; /* mt-1.5 in Tailwind (0.375rem = 6px) */
+  margin-bottom: 0.375rem; /* mb-1.5 in Tailwind */
+  padding-left: 0.25rem; /* pl-1 in Tailwind */
+}
+
+/* =========================
+   4. TEXT FORMATTING
+   ========================= */
+
+/* Bold / Strong */
+.prose strong,
+.prose.prose-slate strong,
+.card-content .prose strong,
+.card-content strong,
+strong,
+.prose b,
+.prose.prose-slate b,
+.card-content .prose b,
+.card-content b {
+  font-weight: 700; /* font-bold in Tailwind */
+}
+
+/* Italic / Emphasis */
+.prose em,
+.prose.prose-slate em,
+.card-content .prose em,
+.card-content em,
+em,
+.prose i,
+.prose.prose-slate i,
+.card-content .prose i,
+.card-content i {
+  font-style: italic;
+}
+
+/* =========================
+   5. LINKS
+   ========================= */
+.prose a,
+.prose.prose-slate a,
+.card-content .prose a,
+.card-content a {
+  color: var(--color-primary);
+  text-decoration: none;
+  transition: color 0.15s ease-in-out;
+}
+
+.prose a:hover,
+.prose.prose-slate a:hover,
+.card-content .prose a:hover,
+.card-content a:hover {
+  color: var(--color-primary-hover, var(--color-primary));
+}
+
+
+/* =========================
+   7. BLOCKQUOTE
+   ========================= */
+.prose blockquote,
+.prose.prose-slate blockquote,
+.card-content .prose blockquote,
+.card-content blockquote {
+  margin: 1.5rem 0 1.5rem 1.5rem; /* my-6 ml-6 in Tailwind */
+  padding-left: 1rem; /* pl-4 in Tailwind */
+  border-left: 4px solid var(--color-border); /* border-l-4 in Tailwind */
+  font-style: italic;
+  color: var(--color-muted-foreground);
+}
+
+/* =========================
+   8. HORIZONTAL RULE
+   ========================= */
+.prose hr,
+.prose.prose-slate hr,
+.card-content .prose hr,
+.card-content hr {
+  border: 0;
+  border-top: 1px solid var(--color-border); /* border-t in Tailwind */
+  margin: 2rem 0; /* my-8 in Tailwind */
+}
+
+
+/* woocommerce reset styles */
+
+.checkout.woocommerce-checkout{
+  grid-template-columns:auto;
+}
